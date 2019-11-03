@@ -13,12 +13,14 @@ export class StatResultsComponent implements OnInit {
   constructor(private statResultsService: StatResultsService) { }
 
   ngOnInit() {
-    
+    this.getListaDeJogosAnalisados()
   }
 
   getListaDeJogosAnalisados(){
     this.statResultsService.getListaJogosAnalisados()
-    .subscribe(listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados);
+    .subscribe(
+      listaJogosAnalisados => console.log(listaJogosAnalisados)
+      );
   }
   
 

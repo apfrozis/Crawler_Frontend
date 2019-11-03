@@ -5,20 +5,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { Game } from './models/game';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class StatResultsService {
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Access-Control-Allow-Origin": '*',
+      "Access-Control-Allow-Headers": "Content-Type"
+    })
+  };
 
   constructor(private http: HttpClient) {
    }
 
-  getListaJogosAnalisados(): Observable<String[]> {
-    const url = '';
-    return this.http.get<String[]>(url).pipe(
+  getListaJogosAnalisados(): Observable<Game[]> {
+    const url = 'http://localhost:8080/getstats';
+    return this.http.get<Game[]>(url,this.httpOptions).pipe(
       tap(_ => this.log(`fetched hero id=`)),
-      catchError(this.handleError<String[]>(`getHero id=`))
+      catchError(this.handleError<Game[]>(`getHero id=`))
     );
 
   }
