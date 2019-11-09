@@ -19,7 +19,7 @@ export class StatResultsComponent implements OnInit {
   getListaDeJogosAnalisados(){
     this.statResultsService.getListaJogosAnalisados()
     .subscribe(
-      listaJogosAnalisados => console.log(listaJogosAnalisados)
+      listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados
       );
   }
   

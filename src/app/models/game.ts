@@ -10,6 +10,10 @@ export class Game {
         over15: String;
         over25: String;
         over35: String;
-
-    
+        over15validation: String;
+        over25validation: String;
+        over35validation: String;
+        over15standardDeviation: String;
+        over25standardDeviation: String;
+        over35standardDeviation: String;    
 }

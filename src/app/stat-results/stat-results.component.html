@@ -1,11 +1,37 @@
 <div class="container">
 <h1>Lista de jogos analisados</h1>
 
-<a *ngFor="let jogoAnalisado of listaJogosAnalisados" class="col-1-4"
-routerLink="">
-<div class="module ">
-<h4>{{jogoAnalisado.name}}</h4>
+
+<div  *ngIf="listaJogosAnalisados" class="module ">
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Liga</th>
+                    <th scope="col">Equipa que joga em casa</th>
+                    <th scope="col">Equipa que joga fora</th>
+                    <th scope="col">Passou na aposta dos 1,5</th>
+                    <th scope="col">Desvio 1,5</th>
+                    <th scope="col">Passou na aposta dos 2,5</th>
+                    <th scope="col">Desvio 2,5</th>
+                    <th scope="col">Passou na aposta dos 3,5</th>
+                    <th scope="col">Desvio 3,5</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let jogoAnalisado of listaJogosAnalisados" routerLink="">
+                  <tr>
+                    <td>{{jogoAnalisado.liga}}</td>
+                    <td>{{jogoAnalisado.equipaCasa.nomeEquipa}}</td>
+                    <td>{{jogoAnalisado.equipaFora.nomeEquipa}}</td>
+                    <td>{{jogoAnalisado.over15validation}}</td>
+                    <td>{{jogoAnalisado.over15standardDeviation}}</td>
+                    <td>{{jogoAnalisado.over25validation}}</td>
+                    <td>{{jogoAnalisado.over25standardDeviation}}</td>
+                    <td>{{jogoAnalisado.over35validation}}</td>
+                    <td>{{jogoAnalisado.over35standardDeviation}}</td>
+                  </tr>
+                </tbody>
+              </table>
 </div>
-</a>
+
 </div>
-<p>stat-results works!</p>
+
