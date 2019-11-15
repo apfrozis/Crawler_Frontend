@@ -1,8 +1,43 @@
-<div class="container">
-<h1>Lista de jogos analisados</h1>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="" style="margin-left: 3%;margin-right: 3%;">
+  <br>
+<h1>Lista de jogos para aposta</h1>
+<br>
+
+<div  *ngIf="listaJogosAnalisados" class="module"  style="min-width: 100%;">
+        <table class= "table" id="tablegames">
+                <thead>
+                  <tr calss="row">
+                    <th scope="col" (click)="sortTable(0)" style="width:10%">Liga<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(1)" style="width:8%">Equipa casa<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(2)" style="width:8%">Equipa fora<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(3)" style="width:12%">Passou na aposta (1,5)<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(4)" style="width:8%">Desvio (1,5)<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(5)" style="width:12%">Passou na aposta (2,5)<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(6)" style="width:8%">Desvio (2,5)<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(7)" style="width:12%">Passou na aposta (3,5)<i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="sortTable(8)" style="width:8%">Desvio (3,5)<i class="fa fa-fw fa-sort"></i></th>
+                  </tr>
+                </thead>
+                    <tbody *ngFor="let jogoAnalisado of listaJogosAnalisados" routerLink="">
+                      <tr class="trhover">
+                        <td><b>{{jogoAnalisado.liga}}</b></td>
+                        <td>{{jogoAnalisado.equipaCasa.nomeEquipa}}</td>
+                        <td>{{jogoAnalisado.equipaFora.nomeEquipa}}</td>
+                        <td>{{jogoAnalisado.over15validation}}</td>
+                        <td>{{jogoAnalisado.over15standardDeviation}}</td>
+                        <td>{{jogoAnalisado.over25validation}}</td>
+                        <td>{{jogoAnalisado.over25standardDeviation}}</td>
+                        <td>{{jogoAnalisado.over35validation}}</td>
+                        <td>{{jogoAnalisado.over35standardDeviation}}</td>
+                      </tr>
+                    </tbody>
+              </table>
+</div>
 
 
-<div  *ngIf="listaJogosAnalisados" class="module ">
+<!--<div  *ngIf="listaJogosAnalisados" class="module ">
         <table class="table">
                 <thead>
                   <tr>
@@ -31,7 +66,7 @@
                   </tr>
                 </tbody>
               </table>
-</div>
+</div>-->
 
 </div>
 
