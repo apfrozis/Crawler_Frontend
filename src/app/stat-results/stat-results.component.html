@@ -2,9 +2,15 @@
 
 <div class="" style="margin-left: 3%;margin-right: 3%;">
   <br>
-<h1>Lista de jogos para aposta</h1>
+<h1>Lista de jogos para apostar</h1>
 <br>
-
+<label style="padding: 20px"><b>Selecione a data dos jogos em que quer aposta: </b></label>
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="addEvent('change', $event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<br>
 <div  *ngIf="listaJogosAnalisados" class="module"  style="min-width: 100%;">
         <table class= "table" id="tablegames">
                 <thead>

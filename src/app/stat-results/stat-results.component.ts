@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatResultsService } from '../stat-results.service';
+import { MatDatepickerInputEvent } from '@angular/material';
+
 
 @Component({
   selector: 'app-stat-results',
@@ -13,7 +15,6 @@ export class StatResultsComponent implements OnInit {
   constructor(private statResultsService: StatResultsService) { }
 
   ngOnInit() {
-    this.getListaDeJogosAnalisados()
   }
 
   getListaDeJogosAnalisados(){
@@ -21,6 +22,11 @@ export class StatResultsComponent implements OnInit {
     .subscribe(
       listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados
       );
+  }
+
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log("sdffsef")
+    this.getListaDeJogosAnalisados()
   }
 
   sortTable(n) {
