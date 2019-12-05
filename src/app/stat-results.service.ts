@@ -25,7 +25,6 @@ export class StatResultsService {
    }
 
   getListaJogosAnalisados(data_pesquisa): Observable<Game[]> {
-    debugger;
     const url = 'http://localhost:8080/getstats';
     this.httpOptions['params'] = new HttpParams().set('search', data_pesquisa)
     return this.http.get<Game[]>(url, this.httpOptions).pipe(

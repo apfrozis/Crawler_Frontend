@@ -22,14 +22,13 @@ export class StatResultsComponent implements OnInit {
   }
 
   getListaDeJogosAnalisados(data_pesquisa){
-    debugger;
     this.statResultsService.getListaJogosAnalisados(data_pesquisa)
     .subscribe(
       listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados
       );
   }
 
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>)  {
     console.log("sdffsef")
     if(event.value<new Date){
       this.dataFutura=false
