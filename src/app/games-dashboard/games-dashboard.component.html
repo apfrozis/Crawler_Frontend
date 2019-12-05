@@ -1,0 +1,236 @@
+<app-main-nav>
+<div class="" style="margin-left: 3%;margin-right: 3%;" *ngIf="dashboardMetrics">
+  <br>
+  <div class="row">
+  <h1>Dashboard - </h1><h3>Comparação de resultados reais com as propostas do algoritmo</h3>
+</div>
+  <mat-grid-list cols="3" style="max-padding: 100px">
+    <mat-grid-tile>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2 style="text-align: center;">Numero de jogos propostos pelo algoritmo</h2></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+           <h3 style="text-align: center;">{{dashboardMetrics.numeroDeJogos}}</h3>
+          </mat-card-content>
+    </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2 style="text-align: center;">Numero de jogos propostos pelo algoritmo</h2></mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+       <h3 style="text-align: center;">{{dashboardMetrics.numeroDeJogos}}</h3>
+      </mat-card-content>
+</mat-card>
+</mat-grid-tile>
+<mat-grid-tile>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title><h2 style="text-align: center;">Numero de jogos propostos pelo algoritmo</h2></mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+   <h3 style="text-align: center;">{{dashboardMetrics.numeroDeJogos}}</h3>
+  </mat-card-content>
+</mat-card>
+</mat-grid-tile>
+  </mat-grid-list>
+
+<mat-tab-group>
+  <mat-tab label="Resumo para apostas + 1,5 golos">
+    <mat-grid-list cols="4">
+        <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="1">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (positivo) do algoritmo</h2></mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+         <h3 style="text-align: center;">{{dashboardMetrics.sucessoPositivo15}}</h3>
+        </mat-card-content>
+      </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (positivo) do algoritmo</h2></mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+         <h3 style="text-align: center;">{{dashboardMetrics.insucessoPositivo15}}</h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="1">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (negativo) do algoritmo</h2></mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+         <h3 style="text-align: center;">{{dashboardMetrics.sucessoNegativo15}}</h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="1">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (negativo) do algoritmo</h2></mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+            <br>
+        <mat-card-content>
+         <h3 style="text-align: center;">{{dashboardMetrics.insucessoNegativo15}}</h3>
+        </mat-card-content>
+      </mat-card> 
+      </mat-grid-tile>
+      </mat-grid-list>   
+  </mat-tab>
+  <mat-tab label="Resumo para apostas + 2,5 golos">
+      <mat-grid-list cols="4">
+          <mat-grid-tile
+          [colspan]="2"
+          [rowspan]="1">
+      <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (positivo) do algoritmo</h2></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+           <h3 style="text-align: center;">{{dashboardMetrics.sucessoPositivo25}}</h3>
+          </mat-card-content>
+        </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="1">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (positivo) do algoritmo</h2></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+           <h3 style="text-align: center;">{{dashboardMetrics.insucessoPositivo25}}</h3>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (negativo) do algoritmo</h2></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+           <h3 style="text-align: center;">{{dashboardMetrics.sucessoNegativo25}}</h3>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (negativo) do algoritmo</h2></mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+              <br>
+          <mat-card-content>
+           <h3 style="text-align: center;">{{dashboardMetrics.insucessoNegativo25}}</h3>
+          </mat-card-content>
+        </mat-card> 
+        </mat-grid-tile>
+      </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="Resumo para apostas + 3,5 golos">
+    <mat-grid-list cols="4">
+      <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="1">
+  <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (positivo) do algoritmo</h2></mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+       <h3 style="text-align: center;">{{dashboardMetrics.sucessoPositivo35}}</h3>
+      </mat-card-content>
+    </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="1">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (positivo) do algoritmo</h2></mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+       <h3 style="text-align: center;">{{dashboardMetrics.insucessoPositivo35}}</h3>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+  [colspan]="2"
+  [rowspan]="1">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2 style="text-align: center;">Percentagem de sucesso (negativo) do algoritmo</h2></mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+       <h3 style="text-align: center;">{{dashboardMetrics.sucessoNegativo35}}</h3>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile
+  [colspan]="2"
+  [rowspan]="1">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2 style="text-align: center;">Percentagem de insucesso (negativo) do algoritmo</h2></mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+          <br>
+      <mat-card-content>
+       <h3 style="text-align: center;">{{dashboardMetrics.insucessoNegativo35}}</h3>
+      </mat-card-content>
+    </mat-card> 
+    </mat-grid-tile>
+  </mat-grid-list>
+    
+  </mat-tab>
+</mat-tab-group>
+
+  
+
+  
+
+</div>
+
+</app-main-nav>

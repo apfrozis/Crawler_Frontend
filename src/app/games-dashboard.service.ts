@@ -7,13 +7,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Game } from './models/game';
 
-
 @Injectable({
   providedIn: 'root'
 })
+export class GamesDashboardService {
 
-
-export class StatResultsService {
   httpOptions = {
     headers: new HttpHeaders({
       "Access-Control-Allow-Origin": '*',
@@ -24,10 +22,8 @@ export class StatResultsService {
   constructor(private http: HttpClient) {
    }
 
-  getListaJogosAnalisados(data_pesquisa): Observable<Game[]> {
-    debugger;
-    const url = 'http://localhost:8080/getstats';
-    this.httpOptions['params'] = new HttpParams().set('search', data_pesquisa)
+   getDashdoardMetrics(): Observable<Game[]> {
+    const url = 'http://localhost:8080/getdashboardmetrics';
     return this.http.get<Game[]>(url, this.httpOptions).pipe(
       tap(_ => this.log(`fetched hero id=`)),
       catchError(this.handleError<Game[]>(`getHero id=`))
@@ -58,6 +54,4 @@ export class StatResultsService {
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
   }
-
-
 }

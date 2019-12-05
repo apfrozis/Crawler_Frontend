@@ -6,12 +6,24 @@ import { StatResultsComponent } from './stat-results/stat-results.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
+import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatCardModule, MatGridListModule, MatTabsModule } from '@angular/material';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { GamesDashboardComponent } from './games-dashboard/games-dashboard.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StatResultsComponent
+    StatResultsComponent,
+    MainNavComponent,
+    GamesDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +32,17 @@ import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputM
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
+    MatGridListModule,
+    AppRoutingModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

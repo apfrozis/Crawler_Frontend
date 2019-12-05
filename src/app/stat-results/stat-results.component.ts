@@ -10,15 +10,20 @@ import { MatDatepickerInputEvent } from '@angular/material';
 })
 export class StatResultsComponent implements OnInit {
 
-  listaJogosAnalisados = [];
+  listaJogosAnalisados: any;
+
+  dataFutura = true;
+
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 
   constructor(private statResultsService: StatResultsService) { }
 
   ngOnInit() {
   }
 
-  getListaDeJogosAnalisados(){
-    this.statResultsService.getListaJogosAnalisados()
+  getListaDeJogosAnalisados(data_pesquisa){
+    debugger;
+    this.statResultsService.getListaJogosAnalisados(data_pesquisa)
     .subscribe(
       listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados
       );
@@ -26,7 +31,12 @@ export class StatResultsComponent implements OnInit {
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     console.log("sdffsef")
-    this.getListaDeJogosAnalisados()
+    if(event.value<new Date){
+      this.dataFutura=false
+    }else{
+      this.dataFutura=true
+    }
+    this.getListaDeJogosAnalisados(event.value)
   }
 
   sortTable(n) {
