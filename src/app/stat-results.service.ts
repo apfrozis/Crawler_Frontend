@@ -24,12 +24,12 @@ export class StatResultsService {
   constructor(private http: HttpClient) {
    }
 
-  getListaJogosAnalisados(data_pesquisa): Observable<Game[]> {
+  getListaJogosAnalisados(data_pesquisa): Observable<any> {
     const url = 'http://localhost:8080/getstats';
     this.httpOptions['params'] = new HttpParams().set('search', data_pesquisa)
-    return this.http.get<Game[]>(url, this.httpOptions).pipe(
+    return this.http.get<any>(url, this.httpOptions).pipe(
       tap(_ => this.log(`fetched hero id=`)),
-      catchError(this.handleError<Game[]>(`getHero id=`))
+      catchError(this.handleError<any>(`getHero id=`))
     );
 
   }
