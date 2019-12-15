@@ -22,7 +22,7 @@
 
             <ng-container matColumnDef="liga">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Liga </th>
-                <td mat-cell *matCellDef="let element"> {{element.liga}} </td>
+                <td mat-cell *matCellDef="let element"><a href="https://www.soccerstats.com/{{element.href}}">{{element.liga}}</a></td>
               </ng-container>
               <ng-container matColumnDef="equipaCasa.nomeEquipa">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipa casa </th>
