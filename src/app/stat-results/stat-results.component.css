@@ -11,3 +11,8 @@ th:hover {
   .mat-sort-header-container {
     align-items: center;
   }
+
+  .vertical-alignemnt td,
+  .vertical-alignemnt th {
+    vertical-align: middle;;
+  }

@@ -25,7 +25,7 @@ export class StatResultsService {
    }
 
   getListaJogosAnalisados(data_pesquisa): Observable<any> {
-    const url = 'http://localhost:8080/getstats';
+    const url = 'http://localhost:8081/getstats';
     this.httpOptions['params'] = new HttpParams().set('search', data_pesquisa)
     return this.http.get<any>(url, this.httpOptions).pipe(
       tap(_ => this.log(`fetched hero id=`)),
