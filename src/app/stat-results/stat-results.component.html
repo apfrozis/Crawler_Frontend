@@ -5,6 +5,7 @@
 <div class="" style="margin-left: 3%;margin-right: 3%;">
   <br>
 <h1>Lista de jogos para apostar</h1>
+
 <br>
 <label style="padding: 20px"><b>Selecione a data dos jogos em que quer apostar: </b></label>
 
@@ -16,27 +17,50 @@
 
 <br>
 
-<div  *ngIf="listaJogosAnalisados" class="module"  style="min-width: 100%;">
-        <table class= "table" id="tablegames">
-                <thead>
-                  <tr calss="row">
-                    <th scope="col" (click)="sortTable(0)" style="width:10%">Liga<i class="fa fa-fw fa-sort"></i></th>
-                    <th scope="col" (click)="sortTable(1)" style="width:8%">Equipa casa<i class="fa fa-fw fa-sort"></i></th>
-                    <th scope="col" (click)="sortTable(2)" style="width:8%">Equipa fora<i class="fa fa-fw fa-sort"></i></th>
-                    <th scope="col" (click)="sortTable(3)" style="width:12%">Passou na aposta (1,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="dataFutura" scope="col" (click)="sortTable(4)" style="width:8%">Desvio (1,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="!dataFutura" scope="col" (click)="sortTable(4)" style="width:8%">Passou mesmo (1,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th scope="col" (click)="sortTable(5)" style="width:12%">Passou na aposta (2,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="dataFutura" scope="col" (click)="sortTable(6)" style="width:8%">Desvio (2,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="!dataFutura" scope="col" (click)="sortTable(4)" style="width:8%">Passou mesmo (2,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th scope="col" (click)="sortTable(7)" style="width:12%">Passou na aposta (3,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="dataFutura" scope="col" (click)="sortTable(8)" style="width:8%">Desvio (3,5)<i class="fa fa-fw fa-sort"></i></th>
-                    <th *ngIf="!dataFutura" scope="col" (click)="sortTable(4)" style="width:8%">Passou mesmo (3,5)<i class="fa fa-fw fa-sort"></i></th>
+<div class="module" style="min-width: 100%;">
+        <table mat-table class= "table" id="tablegames" [dataSource]="listaJogosAnalisados" matSort>
 
-                  </tr>
-                </thead>
-                    <tbody *ngFor="let jogoAnalisado of listaJogosAnalisados" routerLink="">
-                      <tr class="trhover">
+            <ng-container matColumnDef="liga">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Liga </th>
+                <td mat-cell *matCellDef="let element"> {{element.liga}} </td>
+              </ng-container>
+              <ng-container matColumnDef="equipaCasa.nomeEquipa">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipa casa </th>
+                  <td mat-cell *matCellDef="let element"> {{element.equipaCasa.nomeEquipa}} </td>
+                </ng-container>
+                <ng-container matColumnDef="equipaFora.nomeEquipa">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipa fora </th>
+                    <td mat-cell *matCellDef="let element"> {{element.equipaFora.nomeEquipa}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="over15validation">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Passou na aposta (1,5)</th>
+                      <td mat-cell *matCellDef="let element"> {{element.over15validation}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="over15standardDeviation">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (1,5)</th>
+                        <td mat-cell *matCellDef="let element"> {{element.over15standardDeviation}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="over25validation">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>Passou na aposta (2,5)</th>
+                          <td mat-cell *matCellDef="let element"> {{element.over25validation}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="over25standardDeviation">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (2,5)</th>
+                            <td mat-cell *matCellDef="let element"> {{element.over25standardDeviation}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="over35validation">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header>Passou na aposta (3,5)</th>
+                              <td mat-cell *matCellDef="let element"> {{element.over35validation}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="over35standardDeviation">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (3,5)</th>
+                                <td mat-cell *matCellDef="let element"> {{element.over35standardDeviation}} </td>
+                              </ng-container>
+
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr class="trhover" mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+                     <!-- <tr class="trhover" *ngFor="let jogoAnalisado of listaJogosAnalisados">
                         <td><b>{{jogoAnalisado.liga}}</b></td>
                         <td>{{jogoAnalisado.equipaCasa.nomeEquipa}}</td>
                         <td>{{jogoAnalisado.equipaFora.nomeEquipa}}</td>
@@ -49,8 +73,10 @@
                         <td>{{jogoAnalisado.over35validation}}</td>
                         <td *ngIf="dataFutura">{{jogoAnalisado.over35standardDeviation}}</td>
                         <td *ngIf="!dataFutura">{{jogoAnalisado.realOver15validation}}</td>
-                      </tr>
-                    </tbody>
+                      </tr>-->
+
+
+                      
               </table>
 </div>
 

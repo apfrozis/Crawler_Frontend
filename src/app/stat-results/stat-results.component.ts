@@ -1,6 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatResultsService } from '../stat-results.service';
-import { MatDatepickerInputEvent } from '@angular/material';
+import { MatDatepickerInputEvent, MatSort, MatTableDataSource } from '@angular/material';
+
+
+
+
+
+const ELEMENT_DATA = [
+  {liga: 1, equipa_casa: 'Hydrogen', equipa_fora: 1.0079, over15validation: 'H'},
+  {liga: 2, equipa_casa: 'Helium', equipa_fora: 4.0026, over15validation: 'He'},
+  {liga: 3, equipa_casa: 'Lithium', equipa_fora: 6.941, over15validation: 'Li'},
+  {liga: 4, equipa_casa: 'Beryllium', equipa_fora: 9.0122, over15validation: 'Be'},
+  {liga: 5, equipa_casa: 'Boron', equipa_fora: 10.811, over15validation: 'B'},
+  {liga: 6, equipa_casa: 'Carbon', equipa_fora: 12.0107, over15validation: 'C'},
+  {liga: 7, equipa_casa: 'Nitrogen', equipa_fora: 14.0067, over15validation: 'N'},
+  {liga: 8, equipa_casa: 'Oxygen', equipa_fora: 15.9994, over15validation: 'O'},
+  {liga: 9, equipa_casa: 'Fluorine', equipa_fora: 18.9984, over15validation: 'F'},
+  {liga: 10, equipa_casa: 'Neon', equipa_fora: 20.1797, over15validation: 'Ne'},
+];
+
+
 
 
 @Component({
@@ -10,21 +29,28 @@ import { MatDatepickerInputEvent } from '@angular/material';
 })
 export class StatResultsComponent implements OnInit {
 
+  displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa', 'equipaFora.nomeEquipa', 'over15validation', 'over15standardDeviation', 'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation'];
+
   listaJogosAnalisados: any;
 
   dataFutura = true;
 
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private statResultsService: StatResultsService) { }
+
+  constructor(private statResultsService: StatResultsService) { 
+  }
 
   ngOnInit() {
   }
 
   getListaDeJogosAnalisados(data_pesquisa){
     this.statResultsService.getListaJogosAnalisados(data_pesquisa)
-    .subscribe(
-      listaJogosAnalisados => this.listaJogosAnalisados = listaJogosAnalisados.data
+    .subscribe((listaJogosAnalisados) => {
+      this.listaJogosAnalisados  = new MatTableDataSource(listaJogosAnalisados.data);
+      console.log(this.sort)
+      this.listaJogosAnalisados.sort = this.sort;
+    }
       );
   }
 
@@ -38,59 +64,22 @@ export class StatResultsComponent implements OnInit {
     this.getListaDeJogosAnalisados(event.value)
   }
 
-  sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("tablegames");
-    switching = true;
-    // Set the sorting direction to ascending:
-    dir = "asc";
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-      // Start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /* Loop through all table rows (except the
-      first, which contains table headers): */
-      for (i = 1; i < (rows.length - 1); i++) {
-        // Start by saying there should be no switching:
-        shouldSwitch = false;
-        /* Get the two elements you want to compare,
-        one from current row and one from the next: */
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-        /* Check if the two rows should switch place,
-        based on the direction, asc or desc: */
-        if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
+  clearNullValues(data){
+    if(data){
+      data.forEach((entry, idx) => {
+        Object.entries(entry).forEach(([key, value]) => {
+          if(value === null || value === undefined) {
+            data[idx][key] = '-';
           }
-        } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-      if (shouldSwitch) {
-        /* If a switch has been marked, make the switch
-        and mark that a switch has been done: */
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        // Each time a switch is done, increase this count by 1:
-        switchcount ++;
-      } else {
-        /* If no switching has been done AND the direction is "asc",
-        set the direction to "desc" and run the while loop again. */
-        if (switchcount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
+        })
+      })
     }
   }
 
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  debugger;
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
