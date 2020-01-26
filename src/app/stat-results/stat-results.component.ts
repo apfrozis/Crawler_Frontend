@@ -29,14 +29,19 @@ const ELEMENT_DATA = [
 })
 export class StatResultsComponent implements OnInit {
 
-  displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa', 'equipaFora.nomeEquipa', 'over15validation', 'over15standardDeviation', 'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation'];
+  displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa', 'equipaFora.nomeEquipa', 'over15validation', 'over15standardDeviation', 'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation', 'goalsScoredPlusConceded'];
 
-  listaJogosAnalisados: any;
+  listaJogosAnalisados = new MatTableDataSource();
 
   dataFutura = true;
+  varaivel = false;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  private sort: MatSort;
 
+  @ViewChild(MatSort, {static: false}) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
   constructor(private statResultsService: StatResultsService) { 
   }
@@ -47,9 +52,8 @@ export class StatResultsComponent implements OnInit {
   getListaDeJogosAnalisados(data_pesquisa){
     this.statResultsService.getListaJogosAnalisados(data_pesquisa)
     .subscribe((listaJogosAnalisados) => {
-      this.listaJogosAnalisados  = new MatTableDataSource(listaJogosAnalisados.data);
+      this.listaJogosAnalisados.data = listaJogosAnalisados.data;
       console.log(this.sort)
-      this.listaJogosAnalisados.sort = this.sort;
     }
       );
   }
@@ -64,22 +68,8 @@ export class StatResultsComponent implements OnInit {
     this.getListaDeJogosAnalisados(event.value)
   }
 
-  clearNullValues(data){
-    if(data){
-      data.forEach((entry, idx) => {
-        Object.entries(entry).forEach(([key, value]) => {
-          if(value === null || value === undefined) {
-            data[idx][key] = '-';
-          }
-        })
-      })
-    }
+  setDataSourceAttributes() {
+    this.listaJogosAnalisados.sort = this.sort;
   }
-
-
 }
 
-function compare(a: number | string, b: number | string, isAsc: boolean) {
-  debugger;
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}

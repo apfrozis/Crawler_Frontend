@@ -17,7 +17,7 @@
 
 <br>
 
-<div class="module" style="min-width: 100%;">
+<div class="module" style="min-width: 100%;" *ngIf="listaJogosAnalisados.data.length">
         <table mat-table class= "table" id="tablegames" [dataSource]="listaJogosAnalisados" matSort>
 
             <ng-container matColumnDef="liga">
@@ -55,6 +55,10 @@
                             <ng-container matColumnDef="over35standardDeviation">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (3,5)</th>
                                 <td mat-cell *matCellDef="let element"> {{element.over35standardDeviation}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="goalsScoredPlusConceded">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Soma de golos</th>
+                                <td mat-cell *matCellDef="let element"> {{element.goalsScoredPlusConceded}} </td>
                               </ng-container>
 
                               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="vertical-alignemnt"></tr>
