@@ -29,7 +29,16 @@ const ELEMENT_DATA = [
 })
 export class StatResultsComponent implements OnInit {
 
-  displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa', 'equipaFora.nomeEquipa', 'over15validation', 'over15standardDeviation', 'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation', 'goalsScoredPlusConceded'];
+  /*displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa',
+  'equipaFora.nomeEquipa', 'over15validation', 'over15standardDeviation',
+  'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation',
+  'goalsScoredPlusConceded', 'gameResult', 'gameStatus'];*/
+
+  displayedColumns: string[] = ['liga', 'equipaCasa.nomeEquipa',
+  'equipaFora.nomeEquipa',
+  'over25validation', 'over25standardDeviation', 'over35validation', 'over35standardDeviation',
+  'medgolcasa4', 'medsofrcasa4', 'medgolfora4', 'medsofrfora4',
+  'goalsScoredPlusConceded', 'gameResult', 'gameStatus'];
 
   listaJogosAnalisados = new MatTableDataSource();
 

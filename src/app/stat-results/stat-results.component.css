@@ -16,3 +16,11 @@ th:hover {
   .vertical-alignemnt th {
     vertical-align: middle;;
   }
+
+  .red {
+    background-color: red; 
+}
+
+.black {
+  background-color: black;
+}

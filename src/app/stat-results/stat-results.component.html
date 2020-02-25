@@ -18,7 +18,7 @@
 <br>
 
 <div class="module" style="min-width: 100%;" *ngIf="listaJogosAnalisados.data.length">
-        <table mat-table class= "table" id="tablegames" [dataSource]="listaJogosAnalisados" matSort>
+        <table mat-table class= "table" id="tablegames" [dataSource]="listaJogosAnalisados.data" matSort>
 
             <ng-container matColumnDef="liga">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Liga </th>
@@ -32,14 +32,14 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipa fora </th>
                     <td mat-cell *matCellDef="let element"> {{element.equipaFora.nomeEquipa}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="over15validation">
+                 <!-- <ng-container matColumnDef="over15validation">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Passou na aposta (1,5)</th>
                       <td mat-cell *matCellDef="let element"> {{element.over15validation}} </td>
                     </ng-container>
                     <ng-container matColumnDef="over15standardDeviation">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (1,5)</th>
                         <td mat-cell *matCellDef="let element"> {{element.over15standardDeviation}} </td>
-                      </ng-container>
+                      </ng-container>-->
                       <ng-container matColumnDef="over25validation">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header>Passou na aposta (2,5)</th>
                           <td mat-cell *matCellDef="let element"> {{element.over25validation}} </td>
@@ -56,11 +56,48 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Desvio (3,5)</th>
                                 <td mat-cell *matCellDef="let element"> {{element.over35standardDeviation}} </td>
                               </ng-container>
+                              <ng-container matColumnDef="medgolcasa4">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Med Gol Casa 4</th>
+                                <td mat-cell *matCellDef="let element"> {{element.goalsScoredLast4GamesHome}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="medsofrcasa4">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Med Sofr Casa 4</th>
+                                <td mat-cell *matCellDef="let element"> {{element.goalsConcededLast4GamesHome}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="medgolfora4">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Med Gol Fora 4</th>
+                                <td mat-cell *matCellDef="let element"> {{element.goalsScoredLast4GamesAway}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="medsofrfora4">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Med Sofr Fora 4</th>
+                                <td mat-cell *matCellDef="let element"> {{element.goalsConcededLast4GamesAway}} </td>
+                              </ng-container>
                               <ng-container matColumnDef="goalsScoredPlusConceded">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Soma de golos</th>
                                 <td mat-cell *matCellDef="let element"> {{element.goalsScoredPlusConceded}} </td>
                               </ng-container>
-
+                              <ng-container matColumnDef="gameResult">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Resultado</th>
+                                <td mat-cell *matCellDef="let element"> 
+                                    <div *ngIf="element.hasOwnProperty('gameHistory'); else elseDiv">
+                                        {{element.gameHistory.totalScore}} 
+                                    </div>
+                                    <ng-template #elseDiv>
+                                        ----
+                                    </ng-template></td>
+                              </ng-container>
+                              <ng-container matColumnDef="gameStatus">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                                <td mat-cell *matCellDef="let element"> 
+                                  <div *ngIf="element.hasOwnProperty('gameHistory') && element.over35validation=='Passou' && element.goalsScoredPlusConceded >=2.5 && element.gameHistory.totalScore >=3; else red">
+                                    <mat-icon style="color: green">done_outline</mat-icon>
+                                </div>
+                                <ng-template #red>
+                                  <mat-icon *ngIf="element.hasOwnProperty('gameHistory') &&  element.over35validation=='Passou' && element.goalsScoredPlusConceded >=2.5 && element.gameHistory.totalScore <= 2; else empty" style="color: red">highlight_off</mat-icon>
+                                </ng-template>
+                                <ng-template #empty>
+                                </ng-template>
+                              </ng-container>
                               <tr mat-header-row *matHeaderRowDef="displayedColumns" class="vertical-alignemnt"></tr>
                               <tr class="trhover vertical-alignemnt" mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
 
